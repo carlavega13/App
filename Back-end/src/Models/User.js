@@ -8,37 +8,21 @@ module.exports = (sequelize) => {
         type: DataTypes.INTEGER,
         primaryKey: true,
         autoIncrement: true,
-
       },
-      idMoodle: {
-        type: DataTypes.INTEGER,
-   
-  
-      },
-      username: {
+      email: {
         type: DataTypes.STRING,
-   
-  
       },
       password: {
         type: DataTypes.STRING,
-
       },
-      token: {
+      username: {
         type: DataTypes.STRING,
       },
       rol: {
         type: DataTypes.STRING,
-        defaultValue: "estudiante",
-      },
-      isSuperAdmin: {
-        type: DataTypes.BOOLEAN,
-        defaultValue: false,
+        defaultValue: "cliente",
       },
       firstname: {
-        type: DataTypes.STRING,
-      },
-      lastname: {
         type: DataTypes.STRING,
       },
       lastname: {
@@ -47,16 +31,7 @@ module.exports = (sequelize) => {
       fullname: {
         type: DataTypes.STRING,
       },
-      email: {
-        type: DataTypes.STRING,
-      },
       phone: {
-        type: DataTypes.STRING,
-      },
-      dni: {
-        type: DataTypes.STRING,
-      },
-      domain: {
         type: DataTypes.STRING,
       },
     },
