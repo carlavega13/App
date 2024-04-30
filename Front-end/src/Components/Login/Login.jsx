@@ -5,7 +5,8 @@ import { store } from "../../Zustand/store";
 const Login = () => {
   const navigate = useNavigate();
 const userLogged=store(s=>s.user)
-console.log(userLogged);
+const login=store(s=>s.login)
+
   const [user, setUser] = useState({
     email: "",
     password: "",
@@ -19,6 +20,7 @@ console.log(userLogged);
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    login(user)
 
   };
 
