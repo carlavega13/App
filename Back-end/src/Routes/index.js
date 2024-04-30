@@ -1,6 +1,11 @@
 const { Router } = require("express");
+
+const  postUser=require("./Users/postRoutes/postUser");
+const postLogin = require("./Users/postLogin");
 //
 const router = Router();
+router.post("/postUser",postUser)
+router.post("/login",postLogin)
 router.get("/", (req, res) => {
     const html = `
   <!DOCTYPE html>
