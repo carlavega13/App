@@ -1,8 +1,11 @@
+import store from "../../../Zustand/store"
+
 
 //
 const AdminUsers=()=>{
+const user=store(s=>s.user)
+console.log(user);
 
-    console.log(users);
     return(
         <div>
 lista usuarios

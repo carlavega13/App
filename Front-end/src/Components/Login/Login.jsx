@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { store } from "../../Zustand/store";
+import store  from "../../Zustand/store";
 //
 const Login = () => {
   const navigate = useNavigate();
-const userLogged=store(s=>s.user)
-const login=store(s=>s.login)
+  const userLogged = store((s) => s.user);
+  const login = store((s) => s.login);
 
   const [user, setUser] = useState({
     email: "",
@@ -18,17 +18,17 @@ const login=store(s=>s.login)
     });
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    login(user)
-
+  const handleSubmit = async (e) => {
+    try {
+      e.preventDefault();
+      await login(user);
+    } catch (error) {}
   };
 
   useEffect(() => {
     if (userLogged) {
-      if(userLogged.rol==="administrador"){
+      if (userLogged.rol === "administrador") {
         navigate("/adminHome");
-
       }
     }
   }, [userLogged]);
