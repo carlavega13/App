@@ -2,10 +2,15 @@ const { Router } = require("express");
 
 const  postUser=require("./Users/postRoutes/postUser");
 const postLogin = require("./Users/postLogin");
+const getUsers = require("./Users/getRoutes/getUsers");
+const postCredits = require("./Credits/postRoutes/postCredits");
 //
 const router = Router();
 router.post("/postUser",postUser)
 router.post("/login",postLogin)
+router.get("/getUsers/:id",getUsers)
+router.post("/postCredits",postCredits)
+//
 router.get("/", (req, res) => {
     const html = `
   <!DOCTYPE html>

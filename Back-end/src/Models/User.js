@@ -35,6 +35,9 @@ module.exports = (sequelize) => {
       phone: {
         type: DataTypes.STRING,
       },
+      credits: {
+        type: DataTypes.INTEGER,
+      },
     },
     { timestamps: false }
   );
