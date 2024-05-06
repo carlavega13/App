@@ -2,15 +2,19 @@ import { useEffect, useState } from "react";
 import store from "../../../Zustand/store";
 import axios from "axios";
 import CreditsGiverPopOut from "../Credits-giver-popout/CreditsGiverPopOut";
+
 //
 const AdminUsers = () => {
-  const { users, getUsers, user } = store((s) => s);
+  const { users, bringOneUser, user ,getUsers} = store((s) => s);
+console.log(users);
   const [popOut, setPopOut] = useState({
     flag: false,
     admin: user.id,
     client: "",
     clientName: "",
-    credits:""
+    clientCredits:"",
+    credits: "",
+    type: "",
   });
   useEffect(() => {
     async function fetchUsers(id) {
@@ -25,14 +29,17 @@ const AdminUsers = () => {
     return <div>No hay usuarios para mostrar</div>;
   }
 
-  const handleCredits = async (e) => {
+  const handleCredits = (e,type,credits) => {
     setPopOut({
       ...popOut,
-      flag: !popOut?.flag,
+      flag: true,
       client: e.target.id,
       clientName: e.target.name,
+      type: type,
+      clientCredits:credits
     });
   };
+
   return (
     <div>
       {users.map((user) => {
@@ -45,7 +52,7 @@ const AdminUsers = () => {
               <button
                 name={user.fullname}
                 id={user.id}
-                onClick={(e) => handleCredits(e)}
+                onClick={(e) => handleCredits(e,"add",user.credits)}
               >
                 Agregar creditos
               </button>
@@ -53,18 +60,37 @@ const AdminUsers = () => {
               <button
                 name={user.email}
                 id={user.id}
-                onClick={(e) => handleCredits(e)}
+                onClick={(e) => handleCredits(e,"add",user.credits)}
               >
                 Agregar creditos
               </button>
             )}
+                 {user.fullname ? (
+              <button
+                name={user.fullname}
+                id={user.id}
+                onClick={(e) => handleCredits(e,"delete",user.credits)}
+              >
+                Eliminar creditos
+              </button>
+            ) : (
+              <button
+                name={user.email}
+                id={user.id}
+                onClick={(e) => handleCredits(e,"delete",user.credits)}
+              >
+                Eliminar creditos
+              </button>
+            )}
+
           </div>
         );
       })}
       <div>
-        {popOut?.flag && (
-          <CreditsGiverPopOut popOut={popOut} setPopOut={setPopOut} />
+        {popOut?.flag&& (
+          <CreditsGiverPopOut popOut={popOut} setPopOut={setPopOut} bringOneUser={bringOneUser}/>
         )}
+
       </div>
     </div>
   );

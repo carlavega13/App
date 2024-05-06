@@ -13,6 +13,12 @@ const store = create((set) => ({
     const response = await axios(`${HOST}getUsers/${id}`);
     set((state) => ({ users: response.data }));
   },
+  bringOneUser: async (id) => {
+    const response = await axios(`${HOST}getOneUser/${id}`);
+    set((state) => ({
+      users: state.users.map((user) =>user.id==id?response.data:user),
+    }));
+  },
 }));
 
 export default store;
