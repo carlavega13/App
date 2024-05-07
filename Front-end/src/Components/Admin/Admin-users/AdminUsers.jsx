@@ -1,18 +1,16 @@
 import { useEffect, useState } from "react";
 import store from "../../../Zustand/store";
-import axios from "axios";
 import CreditsGiverPopOut from "../Credits-giver-popout/CreditsGiverPopOut";
-
+import { ToastInfo } from "../../../ToastNotification/toast";
 //
 const AdminUsers = () => {
-  const { users, bringOneUser, user ,getUsers} = store((s) => s);
-console.log(users);
+  const { users, bringOneUser, user, getUsers } = store((s) => s);
   const [popOut, setPopOut] = useState({
     flag: false,
     admin: user.id,
     client: "",
     clientName: "",
-    clientCredits:"",
+    clientCredits: "",
     credits: "",
     type: "",
   });
@@ -29,19 +27,20 @@ console.log(users);
     return <div>No hay usuarios para mostrar</div>;
   }
 
-  const handleCredits = (e,type,credits) => {
+  const handleCredits = (e, type, credits) => {
     setPopOut({
       ...popOut,
       flag: true,
       client: e.target.id,
       clientName: e.target.name,
       type: type,
-      clientCredits:credits
+      clientCredits: credits,
     });
   };
 
   return (
     <div>
+      <ToastInfo />
       {users.map((user) => {
         return (
           <div key={user.id}>
@@ -52,7 +51,7 @@ console.log(users);
               <button
                 name={user.fullname}
                 id={user.id}
-                onClick={(e) => handleCredits(e,"add",user.credits)}
+                onClick={(e) => handleCredits(e, "add", user.credits)}
               >
                 Agregar creditos
               </button>
@@ -60,16 +59,16 @@ console.log(users);
               <button
                 name={user.email}
                 id={user.id}
-                onClick={(e) => handleCredits(e,"add",user.credits)}
+                onClick={(e) => handleCredits(e, "add", user.credits)}
               >
                 Agregar creditos
               </button>
             )}
-                 {user.fullname ? (
+            {user.fullname ? (
               <button
                 name={user.fullname}
                 id={user.id}
-                onClick={(e) => handleCredits(e,"delete",user.credits)}
+                onClick={(e) => handleCredits(e, "delete", user.credits)}
               >
                 Eliminar creditos
               </button>
@@ -77,20 +76,22 @@ console.log(users);
               <button
                 name={user.email}
                 id={user.id}
-                onClick={(e) => handleCredits(e,"delete",user.credits)}
+                onClick={(e) => handleCredits(e, "delete", user.credits)}
               >
                 Eliminar creditos
               </button>
             )}
-
           </div>
         );
       })}
       <div>
-        {popOut?.flag&& (
-          <CreditsGiverPopOut popOut={popOut} setPopOut={setPopOut} bringOneUser={bringOneUser}/>
+        {popOut?.flag && (
+          <CreditsGiverPopOut
+            popOut={popOut}
+            setPopOut={setPopOut}
+            bringOneUser={bringOneUser}
+          />
         )}
-
       </div>
     </div>
   );
