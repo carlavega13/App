@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import store  from "../../Zustand/store";
+import store from "../../Zustand/store";
 //
 const Login = () => {
   const navigate = useNavigate();
@@ -17,18 +17,19 @@ const Login = () => {
       [e.target.name]: e.target.value,
     });
   };
-
   const handleSubmit = async (e) => {
     try {
       e.preventDefault();
       await login(user);
     } catch (error) {}
   };
-
   useEffect(() => {
-    if (userLogged) {
+    if (Object.entries(userLogged).length !== 0) {
+      if (!userLogged.fullname) {
+        return navigate("/firstEditProfile");
+      }
       if (userLogged.rol === "administrador") {
-        navigate("/adminHome");
+        return navigate("/adminHome");
       }
     }
   }, [userLogged]);
