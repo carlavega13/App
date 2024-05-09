@@ -6,8 +6,8 @@ import store from "../../Zustand/store";
 import { notifyError } from "../../ToastNotification/toast";
 import { useNavigate } from "react-router-dom";
 
-const EditProfile = ({firstEdit}) => {
-  const navigate=useNavigate()
+const EditProfile = ({ firstEdit }) => {
+  const navigate = useNavigate();
   const [info, setInfo] = useState({
     firstname: "",
     lastname: "",
@@ -22,29 +22,31 @@ const EditProfile = ({firstEdit}) => {
     password: "",
     confirmpassword: "",
   });
-const {putUser,user}=store(s=>s)
-useEffect(()=>{
-  setInfoError(validator(info,firstEdit))
-
-
-},[info])
+  const { putUser, user } = store((s) => s);
+  useEffect(() => {
+    setInfoError(validator(info, firstEdit));
+    if (user.fullname && user.rol === "administrador" && firstEdit) {
+      return navigate("/adminHome");
+    }
+  }, [info, user]);
   const handleSubmit = (e) => {
     e.preventDefault();
-   setInfoError(validator(info,firstEdit));   
-    if(!infoError.firstname&&!infoError.lastname&&!infoError.phone&&!infoError.password&&!infoError.confirmpassword){
-putUser({...info,id:user.id})
-if(user.fullname&&user.rol==="administrador"&&firstEdit){
-  console.log("dssd");
-  return navigate("/adminHome")
-  }
-    }else{
-     infoError.firstname&&notifyError(infoError.firstname)
-     infoError.lastname&&notifyError(infoError.lastname)
-     infoError.phone&&notifyError(infoError.phone)
-     infoError.password&&notifyError(infoError.password)
-     infoError.confirmpassword&&notifyError(infoError.confirmpassword)
+    setInfoError(validator(info, firstEdit));
+    if (
+      !infoError.firstname &&
+      !infoError.lastname &&
+      !infoError.phone &&
+      !infoError.password &&
+      !infoError.confirmpassword
+    ) {
+      putUser({ ...info, id: user.id });
+    } else {
+      infoError.firstname && notifyError(infoError.firstname);
+      infoError.lastname && notifyError(infoError.lastname);
+      infoError.phone && notifyError(infoError.phone);
+      infoError.password && notifyError(infoError.password);
+      infoError.confirmpassword && notifyError(infoError.confirmpassword);
     }
-
   };
   const handleChange = (e) => {
     setInfo({
@@ -54,7 +56,7 @@ if(user.fullname&&user.rol==="administrador"&&firstEdit){
   };
   return (
     <div className={s.box}>
-      <ToastContainer/>
+      <ToastContainer />
       <h2>Editar Perfil</h2>
       <form className={s.formbox} onSubmit={handleSubmit}>
         <label htmlFor="firstname">Nombre: </label>
