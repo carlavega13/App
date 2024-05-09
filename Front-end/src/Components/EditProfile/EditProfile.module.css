@@ -1,0 +1,14 @@
+.formbox{
+    display:flex;
+    flex-direction: column;
+}
+.box{
+    display: flex;
+    background-color: aqua;
+    flex-direction: column;
+    align-items: center;
+    justify-content:center ;
+    height: 60vh;
+    width: 60vw;
+
+}

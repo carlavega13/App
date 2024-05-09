@@ -1,0 +1,9 @@
+.box{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+   align-items: center;
+   background-color: rgb(201, 131, 25);
+   height: 100vh;
+   width: 100vw;
+}

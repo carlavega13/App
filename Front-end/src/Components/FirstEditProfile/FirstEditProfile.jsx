@@ -1,18 +1,13 @@
-import { useEffect } from "react"
 import EditProfile from "../EditProfile/EditProfile"
-import store from "../../Zustand/store"
+import s from "./FirstEditProfile.module.css"
+
 
 const FirstEditProfile=()=>{
-    const{user}=store(s=>s)
-    useEffect(()=>{
-if(user.fullname&&user.rol==="administrador"){
-// navigate()
-}
-    },[user])
-return(
-    <div>
-        first
-        <EditProfile/>
+    return(
+        <div className={s.box}>
+
+        <h1>En tu primer inicio de sesion actualiza tu información</h1>
+        <EditProfile firstEdit={true}/>
     </div>
 )
 }
