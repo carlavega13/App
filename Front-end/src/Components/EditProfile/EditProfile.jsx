@@ -6,7 +6,7 @@ import store from "../../Zustand/store";
 import { notifyError } from "../../ToastNotification/toast";
 import { useNavigate } from "react-router-dom";
 
-const EditProfile = ({ firstEdit }) => {
+const EditProfile = ({ firstEdit,userToEdit }) => {
   const navigate = useNavigate();
   const [info, setInfo] = useState({
     firstname: "",
@@ -39,7 +39,12 @@ const EditProfile = ({ firstEdit }) => {
       !infoError.password &&
       !infoError.confirmpassword
     ) {
-      putUser({ ...info, id: user.id });
+      if(userToEdit){
+        putUser({ ...info, id: userToEdit });
+      }else{
+        putUser({ ...info, id: user.id });
+      }
+      
     } else {
       infoError.firstname && notifyError(infoError.firstname);
       infoError.lastname && notifyError(infoError.lastname);
@@ -69,7 +74,7 @@ const EditProfile = ({ firstEdit }) => {
         <input onChange={handleChange} type="password" name="password" />
         <label htmlFor="confirmpassword">Confirma la contraseña: </label>
         <input onChange={handleChange} type="password" name="confirmpassword" />
-        <button type="submit">Editar mi información</button>
+        <button type="submit">Editar perfil</button>
       </form>
     </div>
   );

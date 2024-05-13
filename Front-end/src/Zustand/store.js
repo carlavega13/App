@@ -36,7 +36,7 @@ const store = create((set) => ({
   putUser: async (info) => {
     try {
       const response = await axios.put(`${HOST}putUser`, info);
-      notifySuccess("Tu perfil fue actualizado.")
+      // notifySuccess("Tu perfil fue actualizado.")
       set((state) => ({ user: response.data }));
     } catch (error) {
       console.log(error.message);

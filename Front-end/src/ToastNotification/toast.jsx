@@ -13,7 +13,7 @@ export const notify = (text) => {
   });
 };
 export const notifyError = (text) => {
-  return toast.warning(`${text}`, {
+  return toast.error(`${text}`, {
     position: "bottom-center",
     autoClose: 5000,
     hideProgressBar: false,

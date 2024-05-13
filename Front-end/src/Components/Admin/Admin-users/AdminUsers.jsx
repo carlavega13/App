@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import store from "../../../Zustand/store";
 import CreditsGiverPopOut from "../Credits-giver-popout/CreditsGiverPopOut";
 import { ToastInfo } from "../../../ToastNotification/toast";
+import s from "./AdminUsers.module.css";
+import EditProfile from "../../EditProfile/EditProfile";
 //
 const AdminUsers = () => {
   const { users, bringOneUser, user, getUsers } = store((s) => s);
@@ -14,6 +16,10 @@ const AdminUsers = () => {
     credits: "",
     type: "",
   });
+  const [edit,setEdit]=useState({
+    flag:false,
+    id:""
+  })
   useEffect(() => {
     async function fetchUsers(id) {
       await getUsers(id);
@@ -39,48 +45,51 @@ const AdminUsers = () => {
   };
 
   return (
-    <div>
+    <div className={s.box}>
       <ToastInfo />
       {users.map((user) => {
         return (
-          <div key={user.id}>
+          <div className={s.card} key={user.id}>
             <h4>{user.fullname}</h4>
             <h5>{user.email}</h5>
             <h5>{user.credits}</h5>
-            {user.fullname ? (
-              <button
-                name={user.fullname}
-                id={user.id}
-                onClick={(e) => handleCredits(e, "add", user.credits)}
-              >
-                Agregar creditos
-              </button>
-            ) : (
-              <button
-                name={user.email}
-                id={user.id}
-                onClick={(e) => handleCredits(e, "add", user.credits)}
-              >
-                Agregar creditos
-              </button>
-            )}
-            {user.fullname ? (
-              <button
-                name={user.fullname}
-                id={user.id}
-                onClick={(e) => handleCredits(e, "delete", user.credits)}
-              >
-                Eliminar creditos
-              </button>
-            ) : (
-              <button
-                name={user.email}
-                id={user.id}
-                onClick={(e) => handleCredits(e, "delete", user.credits)}
-              >
-                Eliminar creditos
-              </button>
-            )}
+            <div>
+              {user.fullname ? (
+                <button
+                  name={user.fullname}
+                  id={user.id}
+                  onClick={(e) => handleCredits(e, "add", user.credits)}
+                >
+                  Agregar creditos
+                </button>
+              ) : (
+                <button
+                  name={user.email}
+                  id={user.id}
+                  onClick={(e) => handleCredits(e, "add", user.credits)}
+                >
+                  Agregar creditos
+                </button>
+              )}
+              {user.fullname ? (
+                <button
+                  name={user.fullname}
+                  id={user.id}
+                  onClick={(e) => handleCredits(e, "delete", user.credits)}
+                >
+                  Eliminar creditos
+                </button>
+              ) : (
+                <button
+                  name={user.email}
+                  id={user.id}
+                  onClick={(e) => handleCredits(e, "delete", user.credits)}
+                >
+                  Eliminar creditos
+                </button>
+              )}
+              <button onClick={()=>setEdit({flag:!edit.flag,id:Number(user.id)})} >Editar</button>
+            </div>
           </div>
         );
       })}
@@ -92,6 +101,7 @@ const AdminUsers = () => {
             bringOneUser={bringOneUser}
           />
         )}
+        {edit.flag&&<EditProfile userToEdit={edit.id}/>}
       </div>
     </div>
   );

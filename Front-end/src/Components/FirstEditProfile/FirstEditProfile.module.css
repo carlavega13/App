@@ -1,9 +1,8 @@
-.box{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-   align-items: center;
-   /* background-color: rgb(201, 131, 25); */
- max-height: 100vh;
+.box {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  max-height: 100vh;
   max-width: 100vw;
 }

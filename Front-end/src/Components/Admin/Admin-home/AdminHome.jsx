@@ -1,11 +1,12 @@
 
 import { ToastContainer } from "react-toastify";
 import AdminUsers from "../Admin-users/AdminUsers";
+import s from "./AdminHome.module.css"
 const AdminHome = () => {
   return (
-    <div>
+    <div className={s.box}>
+      NAV
       <ToastContainer/>
-      HOME
       <AdminUsers />
     </div>
   );
