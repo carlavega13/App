@@ -6,6 +6,7 @@ const getUsers = require("./Users/getRoutes/getUsers");
 const postCredits = require("./Credits/postRoutes/postCredits");
 const getOneUser = require("./Users/getRoutes/getOneUser");
 const putUser = require("./Users/putRoutes/putUser");
+const deleteUser=require("./Users/deleteRoutes/deleteUser")
 //
 
 const router = Router();
@@ -15,6 +16,7 @@ router.get("/getUsers/:id",getUsers)
 router.get("/getOneUser/:id",getOneUser)
 router.post("/postCredits",postCredits)
 router.put("/putUser",putUser)
+router.delete("/deleteUser/:id",deleteUser)
 //
 router.get("/", (req, res) => {
     const html = `
