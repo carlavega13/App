@@ -6,7 +6,7 @@ import store from "../../Zustand/store";
 import { notifyError } from "../../ToastNotification/toast";
 import { useNavigate } from "react-router-dom";
 
-const EditProfile = ({ firstEdit,userToEdit }) => {
+const EditProfile = ({ firstEdit, userToEdit, setEdit }) => {
   const navigate = useNavigate();
   const [info, setInfo] = useState({
     firstname: "",
@@ -39,12 +39,12 @@ const EditProfile = ({ firstEdit,userToEdit }) => {
       !infoError.password &&
       !infoError.confirmpassword
     ) {
-      if(userToEdit){
-        putUser({ ...info, id: userToEdit });
-      }else{
+      if (userToEdit) {
+        putUser({ ...info, id: userToEdit }, userToEdit);
+        // setEdit(false)
+      } else {
         putUser({ ...info, id: user.id });
       }
-      
     } else {
       infoError.firstname && notifyError(infoError.firstname);
       infoError.lastname && notifyError(infoError.lastname);

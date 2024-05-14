@@ -1,5 +1,5 @@
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 export const notify = (text) => {
   return toast(`${text}`, {
     position: "bottom-center",
@@ -34,8 +34,7 @@ export const notifySuccess = (text) => {
     draggable: true,
     progress: undefined,
     theme: "dark",
-
-    });
+  });
 };
 export const ToastInfo = () => {
   return (

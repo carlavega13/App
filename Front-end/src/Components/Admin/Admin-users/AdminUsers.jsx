@@ -6,7 +6,18 @@ import s from "./AdminUsers.module.css";
 import EditProfile from "../../EditProfile/EditProfile";
 //
 const AdminUsers = () => {
-  const { users, bringOneUser, user, getUsers } = store((s) => s);
+  const {
+    users,
+    bringOneUser,
+    user,
+    getUsers,
+    deleteUser: deleteU,
+  } = store((s) => s);
+  const [deleteUser, setDeleteUser] = useState({
+    flag: false,
+    id: "",
+    email: "",
+  });
   const [popOut, setPopOut] = useState({
     flag: false,
     admin: user.id,
@@ -16,10 +27,10 @@ const AdminUsers = () => {
     credits: "",
     type: "",
   });
-  const [edit,setEdit]=useState({
-    flag:false,
-    id:""
-  })
+  const [edit, setEdit] = useState({
+    flag: false,
+    id: "",
+  });
   useEffect(() => {
     async function fetchUsers(id) {
       await getUsers(id);
@@ -43,14 +54,16 @@ const AdminUsers = () => {
       clientCredits: credits,
     });
   };
-
+  const handleDelete = () => {
+    deleteU(deleteUser.id);
+  };
   return (
     <div className={s.box}>
       <ToastInfo />
       {users.map((user) => {
         return (
           <div className={s.card} key={user.id}>
-            <h4>{user.fullname}</h4>
+            <h4>{user?.fullname}</h4>
             <h5>{user.email}</h5>
             <h5>{user.credits}</h5>
             <div>
@@ -88,12 +101,38 @@ const AdminUsers = () => {
                   Eliminar creditos
                 </button>
               )}
-              <button onClick={()=>setEdit({flag:!edit.flag,id:Number(user.id)})} >Editar</button>
+              <button
+                onClick={() => setEdit({ flag: true, id: Number(user.id) })}
+              >
+                Editar
+              </button>
+              <button
+                onClick={() =>
+                  setDeleteUser({
+                    flag: true,
+                    id: Number(user.id),
+                    email: user.email,
+                  })
+                }
+              >
+                Eliminar usuario
+              </button>
             </div>
           </div>
         );
       })}
       <div>
+        {deleteUser.flag && (
+          <div>
+            {`estas seguro que quieres eliminar a ${deleteUser.email} ?`}{" "}
+            <button onClick={handleDelete}>Eliminar</button>
+            <button
+              onClick={() => setDeleteUser({ flag: false, id: "", email: "" })}
+            >
+              Cancelar
+            </button>{" "}
+          </div>
+        )}
         {popOut?.flag && (
           <CreditsGiverPopOut
             popOut={popOut}
@@ -101,7 +140,13 @@ const AdminUsers = () => {
             bringOneUser={bringOneUser}
           />
         )}
-        {edit.flag&&<EditProfile userToEdit={edit.id}/>}
+        {edit.flag && (
+          <div>
+            {" "}
+            <button onClick={() => setEdit(false)}>X</button>
+            <EditProfile userToEdit={edit.id} setEdit={setEdit} />
+          </div>
+        )}
       </div>
     </div>
   );

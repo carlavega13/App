@@ -33,14 +33,35 @@ const store = create((set) => ({
       console.log(error.message);
     }
   },
-  putUser: async (info) => {
+  putUser: async (info, userToEdit) => {
     try {
       const response = await axios.put(`${HOST}putUser`, info);
       // notifySuccess("Tu perfil fue actualizado.")
-      set((state) => ({ user: response.data }));
+      if (userToEdit) {
+        set((state) => ({
+          users: state.users.map((user) =>
+            user.id == userToEdit ? response.data : user
+          ),
+        }));
+      } else {
+        set((state) => ({ user: response.data }));
+      }
     } catch (error) {
       console.log(error.message);
-      notifyError(error.message)
+      notifyError(error.message);
+    }
+  },
+  deleteUser: async (id) => {
+    try {
+      const response = await axios.delete(`${HOST}deleteUser/${id}`);
+      if (response.data) {
+        set((state) => ({ users: state.users.filter((u) => u.id != id) }));
+      } else {
+        notifyError(response.data);
+      }
+      // set((state) => ({}));
+    } catch (error) {
+      notifyError(response.data);
     }
   },
 }));

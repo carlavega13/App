@@ -2,7 +2,7 @@ import axios from "axios";
 import { useState } from "react";
 import { HOST } from "../../../HOST";
 import s from "./CreditsGiverPopOut.module.css";
-import {  notifyError, notifySuccess } from "../../../ToastNotification/toast";
+import { notifyError, notifySuccess } from "../../../ToastNotification/toast";
 
 const CreditsGiverPopOut = ({ popOut, setPopOut, bringOneUser }) => {
   const [confirmCredits, setConfirmCredits] = useState(false);
@@ -85,11 +85,15 @@ const CreditsGiverPopOut = ({ popOut, setPopOut, bringOneUser }) => {
       <input onChange={handleChange} type="number" />
       <h5>
         {popOut.type == "add" && popOut.credits
-          ? `${popOut.clientName} quedará con: ${popOut.credits?
-              Number(popOut.clientCredits) + Number(popOut.credits):popOut.clientCredits
+          ? `${popOut.clientName} quedará con: ${
+              popOut.credits
+                ? Number(popOut.clientCredits) + Number(popOut.credits)
+                : popOut.clientCredits
             }`
-          : `${popOut.clientName} quedará con: ${popOut.credits?
-              Number(popOut.clientCredits) - Number(popOut.credits):popOut.clientCredits
+          : `${popOut.clientName} quedará con: ${
+              popOut.credits
+                ? Number(popOut.clientCredits) - Number(popOut.credits)
+                : popOut.clientCredits
             }`}
       </h5>
       <button onClick={handleConfirm}>
