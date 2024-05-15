@@ -4,7 +4,7 @@ import s from "./AdminHome.module.css";
 const AdminHome = () => {
   return (
     <div className={s.box}>
-      NAV
+      <div></div>
       <ToastContainer />
       <AdminUsers />
     </div>

@@ -4,8 +4,10 @@ import CreditsGiverPopOut from "../Credits-giver-popout/CreditsGiverPopOut";
 import { ToastInfo } from "../../../ToastNotification/toast";
 import s from "./AdminUsers.module.css";
 import EditProfile from "../../EditProfile/EditProfile";
+import { useNavigate } from "react-router-dom";
 //
 const AdminUsers = () => {
+  const navigate=useNavigate()
   const {
     users,
     bringOneUser,
@@ -60,6 +62,7 @@ const AdminUsers = () => {
   return (
     <div className={s.box}>
       <ToastInfo />
+      <div onClick={()=>navigate("/createUser")}>Crear usuario</div>
       {users.map((user) => {
         return (
           <div className={s.card} key={user.id}>

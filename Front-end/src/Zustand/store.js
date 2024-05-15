@@ -64,6 +64,16 @@ const store = create((set) => ({
       notifyError(response.data);
     }
   },
+postUser:async(info)=>{
+  try {
+    const response = await axios.post(`${HOST}postUser`,info);
+    notifySuccess(response.data)
+  } catch (error) {
+    notifyError(error.message)
+    console.log(error.message);
+    
+  }
+}
 }));
 
 export default store;
