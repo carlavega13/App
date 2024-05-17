@@ -8,8 +8,8 @@ const usersList = async (id) => {
       where: { id: { [Sequelize.Op.ne]: id } },
     });
 
-    if(users.length==0){
-      return "No hay usuarios para mostrar"
+    if (users.length == 0) {
+      return "No hay usuarios para mostrar";
     }
     return users;
   } catch (error) {

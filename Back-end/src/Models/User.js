@@ -11,7 +11,7 @@ module.exports = (sequelize) => {
       },
       email: {
         type: DataTypes.STRING,
-        unique:true
+        unique: true,
       },
       password: {
         type: DataTypes.STRING,
@@ -20,8 +20,8 @@ module.exports = (sequelize) => {
         type: DataTypes.STRING,
       },
       rol: {
-        type: DataTypes.STRING,
-        defaultValue: "cliente",
+        type: DataTypes.ENUM("client", "admin"),
+        defaultValue: "client",
       },
       firstname: {
         type: DataTypes.STRING,
@@ -37,6 +37,7 @@ module.exports = (sequelize) => {
       },
       credits: {
         type: DataTypes.INTEGER,
+        defaultValue: 0,
       },
     },
     { timestamps: false }

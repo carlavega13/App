@@ -37,9 +37,13 @@ let capsEntries = entries.map((entry) => [
 sequelize.models = Object.fromEntries(capsEntries);
 
 // En sequelize.models están todos los modelos importados como propiedades
-// Para relacionarlos hacemos un destructuring
+const { User, Transaction} = sequelize.models;
 
-const { User} = sequelize.models;
+User.hasMany(Transaction, { foreignKey: 'user_id' });
+Transaction.belongsTo(User, { as: 'User', foreignKey: 'user_id' });
+
+User.hasMany(Transaction, { foreignKey: 'admin_id' });
+Transaction.belongsTo(User, { as: 'Admin', foreignKey: 'admin_id' });
 
 
 module.exports = {
