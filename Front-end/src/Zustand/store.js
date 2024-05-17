@@ -2,15 +2,28 @@ import { create } from "zustand";
 import { HOST } from "../HOST";
 import axios from "axios";
 import { notifyError, notifySuccess } from "../ToastNotification/toast";
+import bcryptjs from "bcryptjs";
 const store = create((set) => ({
   user: {},
   users: [],
   login: async (userLog) => {
     try {
-      const response = await axios.post(`${HOST}login`, userLog);
-      set((state) => ({ user: response.data }));
+      let response;
+      if (userLog.relog) {
+        response = await axios.post(`${HOST}login`, userLog);
+      } else {
+        const hash = await bcryptjs.hash(userLog.password, 10);
+        response = await axios.post(`${HOST}login`, userLog);
+        window.localStorage.setItem(
+          "userLogged",
+          JSON.stringify({ email: userLog.email, password: hash })
+        );
+        set((state) => ({ user: response.data }));
+        notifySuccess("El usuario inició sesion correctamente.")
+      }
     } catch (error) {
       console.log(error.message);
+      notifyError(error.message);
     }
   },
   getUsers: async (id) => {
@@ -64,16 +77,23 @@ const store = create((set) => ({
       notifyError(response.data);
     }
   },
-postUser:async(info)=>{
-  try {
-    const response = await axios.post(`${HOST}postUser`,info);
-    notifySuccess(response.data)
-  } catch (error) {
-    notifyError(error.message)
-    console.log(error.message);
-    
-  }
-}
+  postUser: async (info) => {
+    try {
+      const response = await axios.post(`${HOST}postUser`, info);
+      notifySuccess("El usuario se creo correctamente");
+      set((state) => ({ users: [...state.users, response.data] }));
+    } catch (error) {
+      notifyError(error.message);
+      console.log(error.message);
+    }
+  },
+  logOut: () => {
+    window.localStorage.setItem(
+      "userLogged",
+      JSON.stringify({ email: "", password: "" })
+    );
+    set((state) => ({ user: {} }));
+  },
 }));
 
 export default store;

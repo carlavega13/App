@@ -15,6 +15,7 @@ const AdminUsers = () => {
     getUsers,
     deleteUser: deleteU,
   } = store((s) => s);
+
   const [deleteUser, setDeleteUser] = useState({
     flag: false,
     id: "",
@@ -58,12 +59,13 @@ const AdminUsers = () => {
   };
   const handleDelete = () => {
     deleteU(deleteUser.id);
+    setDeleteUser({...deleteUser,flag:false})
   };
   return (
     <div className={s.box}>
       <ToastInfo />
       <div onClick={()=>navigate("/createUser")}>Crear usuario</div>
-      {users.map((user) => {
+      {users?.map((user) => {
         return (
           <div className={s.card} key={user.id}>
             <h4>{user?.fullname}</h4>

@@ -82,7 +82,7 @@ const CreditsGiverPopOut = ({ popOut, setPopOut, bringOneUser }) => {
       <h3>{`Cantidad de credito para ${
         popOut.type == "add" ? "cargar" : "eliminar"
       } a ${popOut.clientName}: `}</h3>
-      <input onChange={handleChange} type="number" />
+      <input min="0" onChange={handleChange} type="number" />
       <h5>
         {popOut.type == "add" && popOut.credits
           ? `${popOut.clientName} quedará con: ${

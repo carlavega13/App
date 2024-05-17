@@ -5,6 +5,7 @@ import { ToastContainer } from "react-toastify";
 import store from "../../Zustand/store";
 import { notifyError } from "../../ToastNotification/toast";
 import { useNavigate } from "react-router-dom";
+import { ToastInfo } from "../../ToastNotification/toast";
 
 const EditProfile = ({ firstEdit, userToEdit, setEdit }) => {
   const navigate = useNavigate();
@@ -61,7 +62,7 @@ const EditProfile = ({ firstEdit, userToEdit, setEdit }) => {
   };
   return (
     <div className={s.box}>
-      <ToastContainer />
+      <ToastInfo />
       <h2>Editar Perfil</h2>
       <form className={s.formbox} onSubmit={handleSubmit}>
         <label htmlFor="firstname">Nombre: </label>

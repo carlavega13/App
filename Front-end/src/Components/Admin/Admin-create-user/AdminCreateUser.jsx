@@ -45,7 +45,6 @@ const AdminCreateUser = () => {
       !error.password &&
       !error.confirmpassword
     ) {
-      console.log("lala");
       setError({ ...error, flag: false });
 postUser(info)
     } else {

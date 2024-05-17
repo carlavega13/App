@@ -6,11 +6,11 @@ const Login = () => {
   const navigate = useNavigate();
   const userLogged = store((s) => s.user);
   const login = store((s) => s.login);
-
   const [user, setUser] = useState({
     email: "",
     password: "",
   });
+  console.log(window.localStorage);
   const handleChange = (e) => {
     setUser({
       ...user,
