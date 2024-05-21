@@ -6,7 +6,8 @@ const getUsers = require("./Users/getRoutes/getUsers");
 const postCredits = require("./Credits/postRoutes/postCredits");
 const getOneUser = require("./Users/getRoutes/getOneUser");
 const putUser = require("./Users/putRoutes/putUser");
-const deleteUser=require("./Users/deleteRoutes/deleteUser")
+const deleteUser=require("./Users/deleteRoutes/deleteUser");
+const getAllTransactions = require("./Transactions/getTransactions/getAllTransactions");
 //
 
 const router = Router();
@@ -17,6 +18,7 @@ router.get("/getOneUser/:id",getOneUser)
 router.post("/postCredits",postCredits)
 router.put("/putUser",putUser)
 router.delete("/deleteUser/:id",deleteUser)
+router.get("/getAllTransactions/:id",getAllTransactions)
 //
 router.get("/", (req, res) => {
     const html = `
