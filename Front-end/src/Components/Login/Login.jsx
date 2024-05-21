@@ -28,7 +28,7 @@ const Login = () => {
       if (!userLogged.fullname) {
         return navigate("/firstEditProfile");
       }
-      if (userLogged.rol === "administrador") {
+      if (userLogged.rol === "admin") {
         return navigate("/adminHome");
       }
     }

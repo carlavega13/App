@@ -101,7 +101,7 @@ const AdminUsers = () => {
                 <button
                   name={user.email}
                   id={user.id}
-                  onClick={(e) => handleCredits(e, "delete", user.credits)}
+                  onClick={(e) => handleCredits(e, "subtract", user.credits)}
                 >
                   Eliminar creditos
                 </button>

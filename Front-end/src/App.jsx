@@ -7,6 +7,7 @@ import AdminCreateUser from "./Components/Admin/Admin-create-user/AdminCreateUse
 import store from "./Zustand/store";
 import ErrorView from "./Components/Error-view/ErrorView";
 import { useEffect } from "react";
+import TransactionsList from "./Components/TransactionsList/TransactionsList";
 
 
 
@@ -27,6 +28,7 @@ function App() {
         {user.id && <Route path="/adminHome" element={<AdminHome />} />}
         {user.id && <Route path="/firstEditProfile" element={<FirstEditProfile />} />}
         {user.id && <Route path="/createUser" element={<AdminCreateUser />} />}
+        {user.id && <Route path="/transactions" element={<TransactionsList />} />}
         <Route path="*" element={<ErrorView/>} />
       </Routes>
     </div>

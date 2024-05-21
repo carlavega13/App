@@ -17,6 +17,7 @@ const CreditsGiverPopOut = ({ popOut, setPopOut, bringOneUser }) => {
         credits: popOut.credits,
         type: popOut.type,
         clientCredits: popOut.clientCredits,
+        admin:popOut.admin
       });
       if (response.status == 200) {
         if (popOut.type == "add") {
@@ -46,7 +47,7 @@ const CreditsGiverPopOut = ({ popOut, setPopOut, bringOneUser }) => {
   const handleConfirm = () => {
     if (
       Number(popOut.clientCredits) - Number(popOut.credits) < 0 &&
-      popOut.type == "delete"
+      popOut.type == "subtract"
     ) {
       notifyError(
         "El usuario no puede tener creditos negativos, el usuario tiene que tener minimo 0 creditos"

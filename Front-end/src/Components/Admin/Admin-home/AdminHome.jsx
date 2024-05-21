@@ -14,6 +14,7 @@ const AdminHome = () => {
     <div className={s.box}>
       <div>
         <button onClick={handlelogOut}>Cerrar sesión</button>
+        <button onClick={()=>navigate("/transactions")}>Historial de Movimiento</button>
       </div>
       <ToastContainer />
       <AdminUsers />

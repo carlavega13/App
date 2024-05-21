@@ -26,7 +26,7 @@ const EditProfile = ({ firstEdit, userToEdit, setEdit }) => {
   const { putUser, user } = store((s) => s);
   useEffect(() => {
     setInfoError(validator(info, firstEdit));
-    if (user.fullname && user.rol === "administrador" && firstEdit) {
+    if (user.fullname && user.rol === "admin" && firstEdit) {
       return navigate("/adminHome");
     }
   }, [info, user]);

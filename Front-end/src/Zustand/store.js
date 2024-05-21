@@ -6,6 +6,7 @@ import bcryptjs from "bcryptjs";
 const store = create((set) => ({
   user: {},
   users: [],
+  transactions: [],
   login: async (userLog) => {
     try {
       let response;
@@ -19,11 +20,11 @@ const store = create((set) => ({
           JSON.stringify({ email: userLog.email, password: hash })
         );
         set((state) => ({ user: response.data }));
-        notifySuccess("El usuario inició sesion correctamente.")
+        // notifySuccess("El usuario inició sesion correctamente.");
       }
     } catch (error) {
       console.log(error.message);
-      notifyError(error.message);
+      // notifyError(error.message);
     }
   },
   getUsers: async (id) => {
@@ -61,7 +62,7 @@ const store = create((set) => ({
       }
     } catch (error) {
       console.log(error.message);
-      notifyError(error.message);
+      // notifyError(error.message);
     }
   },
   deleteUser: async (id) => {
@@ -70,20 +71,20 @@ const store = create((set) => ({
       if (response.data) {
         set((state) => ({ users: state.users.filter((u) => u.id != id) }));
       } else {
-        notifyError(response.data);
+        // notifyError(response.data);
       }
       // set((state) => ({}));
     } catch (error) {
-      notifyError(response.data);
+      // notifyError(response.data);
     }
   },
   postUser: async (info) => {
     try {
       const response = await axios.post(`${HOST}postUser`, info);
-      notifySuccess("El usuario se creo correctamente");
+      // notifySuccess("El usuario se creo correctamente");
       set((state) => ({ users: [...state.users, response.data] }));
     } catch (error) {
-      notifyError(error.message);
+      // notifyError(error.message);
       console.log(error.message);
     }
   },
@@ -93,6 +94,17 @@ const store = create((set) => ({
       JSON.stringify({ email: "", password: "" })
     );
     set((state) => ({ user: {} }));
+  },
+  getAllTransactions: async (id) => {
+    try {
+      console.log(id);
+      const response = await axios.get(`${HOST}getAllTransactions/${id}`);
+
+      console.log("res",response.data);
+      set((state) => ({ transactions: response.data }));
+    } catch (error) {
+      console.log(error.message);
+    }
   },
 }));
 
