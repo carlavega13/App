@@ -10,7 +10,7 @@ const Login = () => {
     email: "",
     password: "",
   });
-  console.log(window.localStorage);
+
   const handleChange = (e) => {
     setUser({
       ...user,

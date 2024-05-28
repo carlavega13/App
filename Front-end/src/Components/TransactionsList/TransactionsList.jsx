@@ -4,7 +4,7 @@ import { DataGrid } from "@mui/x-data-grid";
 import { useNavigate } from "react-router-dom";
 const TransactionsList = () => {
   const navigate = useNavigate();
-  const { user, transactions, getAllTransactions,  deleteTransactionsHistory } = store((s) => s);
+  const { user, transactions, getAllTransactions } = store((s) => s);
   useEffect(() => {
     if (transactions.length == 0) {
       getAllTransactions(user.id);
@@ -34,6 +34,7 @@ const TransactionsList = () => {
   ];
 
   const rows = transactions.map((t) => {
+    console.log(t);
     return {
       id: t.transaction_id,
       fullname: t.User.fullname,
