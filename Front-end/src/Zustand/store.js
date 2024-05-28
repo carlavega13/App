@@ -100,7 +100,7 @@ const store = create((set) => ({
       console.log(id);
       const response = await axios.get(`${HOST}getAllTransactions/${id}`);
 
-      console.log("res",response.data);
+      console.log("res", response.data);
       set((state) => ({ transactions: response.data }));
     } catch (error) {
       console.log(error.message);
