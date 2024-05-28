@@ -2,7 +2,6 @@ const { User,Transaction } = require("../../db");
 //
 const passCredits = async (info) => {
   try {
-    console.log(info);
     if(info.type=="add"){
       const updatedUser = await User.update(
         { credits:Number(info.credits)+Number(info.clientCredits)},
@@ -10,7 +9,7 @@ const passCredits = async (info) => {
       );      
       await Transaction.create({
         user_id: info.client,
-        admin_id: info.admin, // Asegúrate de que info.admin tenga el ID del administrador que realiza la acción
+        admin_id: info.admin,
         credits: info.credits,
         transaction_type: "add",
       });
@@ -24,7 +23,7 @@ const passCredits = async (info) => {
       );
       await Transaction.create({
         user_id: info.client,
-        admin_id: info.admin, // Asegúrate de que info.admin tenga el ID del administrador que realiza la acción
+        admin_id: info.admin,
         credits: info.credits,
         transaction_type: "subtract",
       });
