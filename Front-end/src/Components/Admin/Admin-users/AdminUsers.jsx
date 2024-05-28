@@ -99,7 +99,7 @@ console.log("user",user);
             <button
               name={info.row.fullname}
               id={info.row.id}
-              onClick={(e) => handleCredits(e, "delete", info.row.credits)}
+              onClick={(e) => handleCredits(e, "subtract", info.row.credits)}
             >
               Eliminar creditos
             </button>
