@@ -2,12 +2,12 @@ const sgMail = require("./sendGridSetApiKey");
 const mail = require("./htmlSendGrid");
 const postMailController = async (info) => {
   try {
-    const mailToSend = mail(info.text);
+console.log(info);
 
     const msg = {
       subject: info.subject,
       to: info.to,
-      html: mailToSend,
+      html:info.text,
       from: "carlavega231323@gmail.com",
     };
     const response = await sgMail.send(msg);
