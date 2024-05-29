@@ -16,7 +16,7 @@ const AdminUsers = () => {
     getUsers,
     deleteUser: deleteU,
   } = store((s) => s);
-console.log("user",user);
+  console.log("user", user);
   const [deleteUser, setDeleteUser] = useState({
     flag: false,
     id: "",
@@ -75,60 +75,59 @@ console.log("user",user);
       headerName: "Acciones",
       width: 700,
       renderCell: (info) => {
-     
         return (
           <div>
-          {info.row.fullname ? (
+            {info.row.fullname ? (
+              <button
+                name={info.row.fullname}
+                id={info.row.id}
+                onClick={(e) => handleCredits(e, "add", info.row.credits)}
+              >
+                Agregar creditos
+              </button>
+            ) : (
+              <button
+                name={info.row.email}
+                id={info.row.id}
+                onClick={(e) => handleCredits(e, "add", info.row.credits)}
+              >
+                Agregar creditos
+              </button>
+            )}
+            {info.row.fullname ? (
+              <button
+                name={info.row.fullname}
+                id={info.row.id}
+                onClick={(e) => handleCredits(e, "subtract", info.row.credits)}
+              >
+                Eliminar creditos
+              </button>
+            ) : (
+              <button
+                name={info.row.email}
+                id={info.row.id}
+                onClick={(e) => handleCredits(e, "subtract", info.row.credits)}
+              >
+                Eliminar creditos
+              </button>
+            )}
             <button
-              name={info.row.fullname}
-              id={info.row.id}
-              onClick={(e) => handleCredits(e, "add", info.row.credits)}
+              onClick={() => setEdit({ flag: true, id: Number(info.row.id) })}
             >
-              Agregar creditos
+              Editar
             </button>
-          ) : (
             <button
-              name={info.row.email}
-              id={info.row.id}
-              onClick={(e) => handleCredits(e, "add", info.row.credits)}
+              onClick={() =>
+                setDeleteUser({
+                  flag: true,
+                  id: Number(info.row.id),
+                  email: info.row.email,
+                })
+              }
             >
-              Agregar creditos
+              Eliminar usuario
             </button>
-          )}
-          {info.row.fullname ? (
-            <button
-              name={info.row.fullname}
-              id={info.row.id}
-              onClick={(e) => handleCredits(e, "subtract", info.row.credits)}
-            >
-              Eliminar creditos
-            </button>
-          ) : (
-            <button
-              name={info.row.email}
-              id={info.row.id}
-              onClick={(e) => handleCredits(e, "subtract", info.row.credits)}
-            >
-              Eliminar creditos
-            </button>
-          )}
-          <button
-            onClick={() => setEdit({ flag: true, id: Number(info.row.id) })}
-          >
-            Editar
-          </button>
-          <button
-            onClick={() =>
-              setDeleteUser({
-                flag: true,
-                id: Number(info.row.id),
-                email: info.row.email,
-              })
-            }
-          >
-            Eliminar usuario
-          </button>
-        </div>
+          </div>
         );
       },
     },
@@ -150,10 +149,9 @@ console.log("user",user);
           <div className={s.deleteBox}>
             {`estas seguro que quieres eliminar a ${deleteUser.email} ?`}{" "}
             <button onClick={handleDelete}>Eliminar</button>
-
             <button
               onClick={() => setDeleteUser({ flag: false, id: "", email: "" })}
-              >
+            >
               Cancelar
             </button>{" "}
           </div>
@@ -182,7 +180,7 @@ console.log("user",user);
             paginationModel: { page: 0, pageSize: 5 },
           },
         }}
-        pageSizeOptions={[5, 10]}
+        pageSizeOptions={[5, 10, 15, 20, 25]}
         checkboxSelection
       />
     </div>

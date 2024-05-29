@@ -9,7 +9,6 @@ const TransactionsList = () => {
     if (transactions.length == 0) {
       getAllTransactions(user.id);
     }
-
   }, [transactions]);
   if (typeof transactions == "string") {
     return (
@@ -34,7 +33,6 @@ const TransactionsList = () => {
   ];
 
   const rows = transactions.map((t) => {
-    console.log(t);
     return {
       id: t.transaction_id,
       fullname: t.User.fullname,
@@ -48,7 +46,13 @@ const TransactionsList = () => {
 
   return (
     <div>
-      <button onClick={() => {navigate("/adminHome") }}>Atras</button>
+      <button
+        onClick={() => {
+          navigate("/adminHome");
+        }}
+      >
+        Atras
+      </button>
       <DataGrid
         rows={rows}
         columns={columns}
@@ -57,10 +61,9 @@ const TransactionsList = () => {
             paginationModel: { page: 0, pageSize: 5 },
           },
         }}
-        pageSizeOptions={[5, 10]}
+        pageSizeOptions={[5, 10, 15, 20, 25]}
         checkboxSelection
       />
-      list
     </div>
   );
 };
