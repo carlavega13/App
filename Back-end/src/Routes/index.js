@@ -8,8 +8,8 @@ const getOneUser = require("./Users/getRoutes/getOneUser");
 const putUser = require("./Users/putRoutes/putUser");
 const deleteUser=require("./Users/deleteRoutes/deleteUser");
 const getAllTransactions = require("./Transactions/getTransactions/getAllTransactions");
+const postMail = require("./Mails/postMail");
 //
-
 const router = Router();
 router.post("/postUser",postUser)
 router.post("/login",postLogin)
@@ -19,8 +19,10 @@ router.post("/postCredits",postCredits)
 router.put("/putUser",putUser)
 router.delete("/deleteUser/:id",deleteUser)
 router.get("/getAllTransactions/:id",getAllTransactions)
+router.post("/sendMail",postMail)
 //
 router.get("/", (req, res) => {
+
     const html = `
   <!DOCTYPE html>
   <html>
