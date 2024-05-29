@@ -7,3 +7,4 @@ conn.sync({ force: false }).then(() => {
     console.log(" listening at 3001");
   });
 });
+
