@@ -2,5 +2,33 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: start;
+}
+.passwordBox {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.passwordInputs {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.randomPasswordButton {
+  margin-left: 10px; 
+}
+.formBox {
+  display: flex;
+  background-color: aquamarine;
+  justify-content: center;
+  align-items: center;
+  width: 30vw;
+  justify-content: space-around;
+}
+
+.randomPassword {
+  height: fit-content;
   align-items: center;
 }

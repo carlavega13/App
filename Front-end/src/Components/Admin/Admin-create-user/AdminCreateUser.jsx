@@ -4,14 +4,15 @@ import { useEffect, useState } from "react";
 import validator from "./validator";
 import store from "../../../Zustand/store";
 import { ToastContainer } from "react-toastify";
+import randomPassword from "../../../utils/randomPassword";
 const AdminCreateUser = () => {
   const navigate = useNavigate();
-  const {postUser}=store(s=>s)
+  const { postUser } = store((s) => s);
   const [flag, setFlag] = useState(false);
   const [info, setInfo] = useState({
     email: "",
     password: "",
-    confirmpassword:"",
+    confirmpassword: "",
     firstname: "",
     lastname: "",
     phone: "",
@@ -20,7 +21,7 @@ const AdminCreateUser = () => {
     flag: false,
     email: "",
     password: "",
-    confirmpassword:"",
+    confirmpassword: "",
     firstname: "",
     lastname: "",
     phone: "",
@@ -46,65 +47,78 @@ const AdminCreateUser = () => {
       !error.confirmpassword
     ) {
       setError({ ...error, flag: false });
-postUser(info)
+      postUser(info);
     } else {
       setError({ ...error, flag: true });
     }
   };
-  
+const handlerRandomPassword=()=>{
+const randomPass= randomPassword()
+setInfo({...info,password:randomPass,confirmpassword:randomPass})
+}
+console.log(info.password);
   return (
+
+
     <div>
-        <ToastContainer/>
+      <ToastContainer />
       <button onClick={() => navigate("/adminHome")}>Atras</button>
-      <form className={s.box}>
-        <label htmlFor="email">Correo Electrónico:</label>
-        <input onChange={handleChange} type="email" name="email" required />
-        {error.flag && error.email && <p>{`${error.email}`}</p>}
+      <div className={s.formBox}>
+        <form className={s.box}>
+          <label htmlFor="email">Correo Electrónico:</label>
+          <input value={info.email} onChange={handleChange} type="email" name="email" required />
+          {error.flag && error.email && <p>{`${error.email}`}</p>}
 
-        <label htmlFor="password">Contraseña:</label>
-        <input
-          onChange={handleChange}
-          type="password"
-          name="password"
-          required
-        />
-        {error.flag && error.password && <p>{`${error.password}`}</p>}
+          <label htmlFor="password">Contraseña:</label>
+          <input
+          value={info.password}
+            onChange={handleChange}
+            type="password"
+            name="password"
+            required
+          />
+          {error.flag && error.password && <p>{`${error.password}`}</p>}
 
+          <label htmlFor="confirmpassword">Confirma la contraseña: </label>
+          <input
+          value={info.confirmpassword}
+            onChange={handleChange}
+            type="password"
+            name="confirmpassword"
+            required
+          />
+          {error.flag && error.confirmpassword && (
+            <p>{`${error.confirmpassword}`}</p>
+          )}
 
-        <label htmlFor="confirmpassword">Confirma la contraseña: </label>
-        <input
-          onChange={handleChange}
-          type="password"
-          name="confirmpassword"
-          required
-        />
-        {error.flag && error.confirmpassword && <p>{`${error.confirmpassword}`}</p>}
+          {!flag ? (
+            <p onClick={() => setFlag(!flag)}>{`Agregar información.`}</p>
+          ) : (
+            <div className={s.box}>
+              <label htmlFor="firstname">Primer Nombre:</label>
+              <input value={info.firstname} onChange={handleChange} type="text" name="firstname" />
+              {error.flag && error.firstname && <p>{`${error.firstname}`}</p>}
 
-        {!flag ? (
-          <p onClick={() => setFlag(!flag)}>{`Agregar información.`}</p>
-        ) : (
-          <div className={s.box}>
-            <label htmlFor="firstname">Primer Nombre:</label>
-            <input onChange={handleChange} type="text" name="firstname" />
-            {error.flag && error.firstname && <p>{`${error.firstname}`}</p>}
+              <label htmlFor="lastname">Apellido:</label>
+              <input value={info.lastname} onChange={handleChange} type="text" name="lastname" />
+              {error.flag && error.lastname && <p>{`${error.lastname}`}</p>}
 
-            <label htmlFor="lastname">Apellido:</label>
-            <input onChange={handleChange} type="text" name="lastname" />
-            {error.flag && error.lastname && <p>{`${error.lastname}`}</p>}
+              <label htmlFor="phone">Teléfono:</label>
+              <input value={info.phone} onChange={handleChange} type="tel" name="phone" />
+              {error.flag && error.phone && <p>{`${error.phone}`}</p>}
 
-            <label htmlFor="phone">Teléfono:</label>
-            <input onChange={handleChange} type="tel" name="phone" />
-            {error.flag && error.phone && <p>{`${error.phone}`}</p>}
+              <p onClick={() => setFlag(!flag)}>{`Mostrar menos.`}</p>
+            </div>
+          )}
 
-            <p onClick={() => setFlag(!flag)}>{`Mostrar menos.`}</p>
-          </div>
-        )}
-
-        <button onClick={handleCreate} type="submit">
-          Crear Usuario
-        </button>
-      </form>
+          <button onClick={handleCreate} type="submit">
+            Crear Usuario
+          </button>
+        </form>
+        <button onClick={handlerRandomPassword} className={s.randomPassword}>Generar contraseña aleatoria</button>
+      </div>
     </div>
+
   );
 };
 export default AdminCreateUser;
