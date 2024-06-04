@@ -8,6 +8,7 @@ import store from "./Zustand/store";
 import ErrorView from "./Components/Error-view/ErrorView";
 import { useEffect } from "react";
 import TransactionsList from "./Components/TransactionsList/TransactionsList";
+import ForgetPassword from "./Components/ForgetPassword/ForgetPassword";
 
 
 
@@ -29,6 +30,7 @@ function App() {
         {user.id && <Route path="/firstEditProfile" element={<FirstEditProfile />} />}
         {user.id && <Route path="/createUser" element={<AdminCreateUser />} />}
         {user.id && <Route path="/transactions" element={<TransactionsList />} />}
+       <Route path="/forgetPassword" element={< ForgetPassword/>} />
         <Route path="*" element={<ErrorView/>} />
       </Routes>
     </div>

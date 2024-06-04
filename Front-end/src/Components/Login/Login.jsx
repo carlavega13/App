@@ -10,7 +10,7 @@ const Login = () => {
     email: "",
     password: "",
   });
-
+  
   const handleChange = (e) => {
     setUser({
       ...user,
@@ -33,6 +33,9 @@ const Login = () => {
       }
     }
   }, [userLogged]);
+  const handleForgetPassword = () => {
+    navigate("/forgetPassword");
+  };
   return (
     <div>
       <h2>Iniciar Sesión</h2>
@@ -61,8 +64,10 @@ const Login = () => {
             required
           />
         </div>
+        <p onClick={handleForgetPassword}>Olvide mi contraseña</p>
         <button type="submit">Iniciar Sesión</button>
       </form>
+
     </div>
   );
 };
