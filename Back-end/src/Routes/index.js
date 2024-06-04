@@ -9,6 +9,7 @@ const putUser = require("./Users/putRoutes/putUser");
 const deleteUser=require("./Users/deleteRoutes/deleteUser");
 const getAllTransactions = require("./Transactions/getTransactions/getAllTransactions");
 const postMail = require("./Mails/postMail");
+const forgetPassword = require("./Users/postRoutes/forgetPassword");
 //
 const router = Router();
 router.post("/postUser",postUser)
@@ -20,8 +21,10 @@ router.put("/putUser",putUser)
 router.delete("/deleteUser/:id",deleteUser)
 router.get("/getAllTransactions/:id",getAllTransactions)
 router.post("/sendMail",postMail)
+router.post("/forgetPassword",forgetPassword)
 //
 router.get("/", (req, res) => {
+
 
     const html = `
   <!DOCTYPE html>

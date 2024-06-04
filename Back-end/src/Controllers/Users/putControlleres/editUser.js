@@ -1,10 +1,20 @@
 const { User } = require("../../../db");
 const editUser = async (info) => {
   try {
-    const updatedUser = await User.findOne({
-      attributes: { exclude: ["password"] },
-      where: { id: info.id },
-    });
+    let updatedUser;
+    if(info.type==="changePassword"){
+       updatedUser = await User.findOne({
+        attributes: { exclude: ["password"] },
+        where: { email: info.email },
+      });
+    }else{
+       updatedUser = await User.findOne({
+        attributes: { exclude: ["password"] },
+        where: { id: info.id },
+      });
+
+    }
+
     const filterInfo = {};
     if (info.firstname) {
       filterInfo.firstname = `${info.firstname[0].toUpperCase()}${info.firstname.slice(
