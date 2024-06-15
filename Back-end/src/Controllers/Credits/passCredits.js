@@ -2,7 +2,6 @@ const { User, Transaction } = require("../../db");
 //
 const passCredits = async (info) => {
   try {
-    console.log(info);
     if (info.type == "add") {
       const updatedUser = await User.update(
         { credits: Number(info.credits) + Number(info.clientCredits) },

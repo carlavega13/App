@@ -16,7 +16,6 @@ const AdminUsers = () => {
     getUsers,
     deleteUser: deleteU,
   } = store((s) => s);
-  console.log("user", user);
   const [deleteUser, setDeleteUser] = useState({
     flag: false,
     id: "",
@@ -68,7 +67,14 @@ const AdminUsers = () => {
     { field: "id", headerName: "ID", width: 70 },
     { field: "fullname", headerName: "Nombre Completo", width: 130 },
     { field: "email", headerName: "Email", width: 130 },
-    { field: "phone", headerName: "Telefono", width: 130 },
+    {
+      field: "phone",
+      headerName: "Telefono",
+      width: 130,
+      renderCell: (info) => {
+        return <a href={`https://wa.me/${info.row.phone}`}>{info.row.phone}</a>;
+      },
+    },
     { field: "credits", headerName: "Creditos", width: 130 },
     {
       field: "actions",

@@ -34,7 +34,6 @@ const navigate=useNavigate()
   };
   const handleSend = async (email) => {
     try {
-      console.log(email.email);
       const regexEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
       if (regexEmail.test(email.email)) {
         const res = await axios.post(`${HOST}forgetPassword`, {
@@ -90,6 +89,7 @@ useEffect(()=>{
 
   return (
     <div>
+      <button onClick={()=>navigate("/")}>Atras</button>
       <ToastInfo />
       <label htmlFor="email">Correo electronico: </label>
       <input

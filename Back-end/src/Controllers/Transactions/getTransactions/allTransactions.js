@@ -1,7 +1,6 @@
 const { Transaction, User } = require("../../../db");
 const allTransactions = async (id) => {
   try {
-    console.log(id);
     const response = await Transaction.findAll({
       where: { admin_id: id },
       include: [
@@ -17,7 +16,6 @@ const allTransactions = async (id) => {
         },
       ],
     });
-    console.log(response);
     if (response.length == 0) {
       return "No tienes transacciones realizadas.";
     }

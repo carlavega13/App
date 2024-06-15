@@ -2,8 +2,6 @@ const sgMail = require("./sendGridSetApiKey");
 const mail = require("./htmlSendGrid");
 const postMailController = async (info) => {
   try {
-console.log(info);
-
     const msg = {
       subject: info.subject,
       to: info.to,

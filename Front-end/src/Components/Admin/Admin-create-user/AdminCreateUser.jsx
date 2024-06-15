@@ -56,10 +56,7 @@ const handlerRandomPassword=()=>{
 const randomPass= randomPassword()
 setInfo({...info,password:randomPass,confirmpassword:randomPass})
 }
-console.log(info.password);
   return (
-
-
     <div>
       <ToastContainer />
       <button onClick={() => navigate("/adminHome")}>Atras</button>
