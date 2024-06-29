@@ -9,9 +9,6 @@ import ErrorView from "./Components/Error-view/ErrorView";
 import { useEffect } from "react";
 import TransactionsList from "./Components/TransactionsList/TransactionsList";
 import ForgetPassword from "./Components/ForgetPassword/ForgetPassword";
-
-
-
 //
 function App() {
   const { user,login } = store((s) => s);
